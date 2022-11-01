@@ -3,8 +3,10 @@ package org.sid.ebankbankaccountservice.web;
 import org.sid.ebankbankaccountservice.dto.BankAccountRequestDTO;
 import org.sid.ebankbankaccountservice.dto.BankAccountResponseDTO;
 import org.sid.ebankbankaccountservice.entities.BankAccount;
+import org.sid.ebankbankaccountservice.mappers.AccountMapper;
 import org.sid.ebankbankaccountservice.repositories.BankAccountRepository;
 import org.sid.ebankbankaccountservice.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -18,8 +20,12 @@ public class AccountRestController {
    private BankAccountRepository bankAccountRepository;
    private AccountService accountService;
 
+   private AccountMapper accountMapper;
+
    public AccountRestController(BankAccountRepository bankAccountRepository) {
       this.bankAccountRepository = bankAccountRepository;
+      this.accountService=accountService;
+      this.accountMapper=accountMapper;
    }
    @GetMapping("/bankAccounts")
    public List<BankAccount>bankAccounts(){

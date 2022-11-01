@@ -1,7 +1,10 @@
 package org.sid.ebankbankaccountservice.web;
 
+import org.sid.ebankbankaccountservice.dto.BankAccountRequestDTO;
+import org.sid.ebankbankaccountservice.dto.BankAccountResponseDTO;
 import org.sid.ebankbankaccountservice.entities.BankAccount;
 import org.sid.ebankbankaccountservice.repositories.BankAccountRepository;
+import org.sid.ebankbankaccountservice.service.AccountService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -9,9 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/api")
 public class AccountRestController {
 
    private BankAccountRepository bankAccountRepository;
+   private AccountService accountService;
 
    public AccountRestController(BankAccountRepository bankAccountRepository) {
       this.bankAccountRepository = bankAccountRepository;
@@ -25,9 +30,8 @@ public class AccountRestController {
       return bankAccountRepository.findById(id).orElseThrow(()->new RuntimeException(String.format("Account %s not found",id)));
    }
    @PostMapping("/bankAccounts")
-   public BankAccount save(@RequestBody BankAccount bankAccount){
-      if(bankAccount.getId()==null) bankAccount.setId(UUID.randomUUID().toString());
-      return bankAccountRepository.save(bankAccount);
+   public BankAccountResponseDTO save(@RequestBody BankAccountRequestDTO requestDTO){
+      return accountService.addAccount(requestDTO);
    }
    @PutMapping("/bankAccounts/{id}")
    public BankAccount update(@PathVariable String id,@RequestBody BankAccount bankAccount){

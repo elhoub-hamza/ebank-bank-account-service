@@ -11,7 +11,7 @@
 	<groupId>org.sid</groupId>
 	<artifactId>ebank-bank-account-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ebank-bank-account-service</name>
+	<name>bank-bank-account-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
@@ -75,7 +75,7 @@
 				<configuration>
 					<excludes>
 						<exclude>
-							<groupId>org.projectlombok</groupId>
+							<groupId>org.project-lombok</groupId>
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
